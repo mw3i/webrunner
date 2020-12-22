@@ -1,0 +1,32 @@
+<!-- init doc -->
+<!-- REMEMBER TO ADD SWARM -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exit Page</title>
+
+    </head>
+
+
+    <body style="font-family: Arial">
+ 
+        <h1>Thanks!!!</h1>
+        <br>
+        <h2>We really appreciate it. Have an awesome day! :)</h2>
+
+        <script type="text/javascript">
+            '{% if assign_SONA_credit == True %}'
+                if (localStorage.getItem('creditid') == 'null') {
+                    window.location = '/_crediterror_'
+                } else {
+                    window.location = '{{ SONA_link | safe }}'.concat(localStorage.getItem('creditid').toString())
+                }
+            '{% endif %}'
+        </script>
+
+
+    </body>
+
+</html>

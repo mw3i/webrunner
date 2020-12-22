@@ -1,0 +1,32 @@
+#start_submit {
+    border: none;
+    background: #404040;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: 400;
+    padding-top: 20px; padding-bottom: 20px; 
+    padding-right: 40px; padding-left: 40px; 
+    /*text-transform: uppercase;*/
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+    letter-spacing: 2px;
+}
+
+#start_quit {
+    border: none;
+    background: #c7c7c7;
+    color: #404040;
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: 400;
+    padding-top: 20px; padding-bottom: 20px; 
+    padding-right: 40px; padding-left: 40px; 
+    /*text-transform: uppercase;*/
+    border-radius: 6px;
+    display: inline-block;
+    transition: all 0.3s ease 0s;
+    letter-spacing: 2px;
+}
+

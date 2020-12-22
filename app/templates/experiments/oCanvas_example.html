@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+
+        <!-- imports -->
+        <script src="static/utils.js"></script>
+        <script src='static/experiments/oCanvas_example/materials/ocanvas-2.10.0.js'></script>
+        <script src='static/experiments/oCanvas_example/instructions.js'></script>
+        <script src='static/experiments/oCanvas_example/ready.js'></script>
+        <script src='static/experiments/oCanvas_example/classification.js'></script>
+        <script src='static/experiments/oCanvas_example/sort.js'></script>
+        <script src='static/experiments/oCanvas_example/typicality.js'></script>
+        <script src='static/experiments/oCanvas_example/study.js'></script>
+
+        <!-- <link href="static/experiments/oCanvas_example/materials/styles.css" rel="stylesheet" type="text/css"></link> -->
+
+    </head>
+    
+    <!-- <body style = 'margin-bottom: 0px; margin-top: 0px; margin-left: 0px; margin-right: 0px;'> -->
+    <body style = 'background: rgb(190,190,190);'>
+        <div id='main'></div>
+
+        <script type="text/javascript">
+            subject = {
+                id: '{{ current_user.id }}',
+                condition: parseInt('{{ current_user.condition }}'),
+                results: {
+                    'trainPhase': [],
+                    'typicality': [],
+                    'sort': [],
+                }
+            }
+
+            stim = {
+                1: [
+                    'static/experiments/oCanvas_example/materials/condition1/0000.png',
+                    'static/experiments/oCanvas_example/materials/condition1/0110.png',
+                    'static/experiments/oCanvas_example/materials/condition1/0111.png',
+                    'static/experiments/oCanvas_example/materials/condition1/1101.png',
+                    'static/experiments/oCanvas_example/materials/condition1/1110.png',
+                ],
+
+                2: [
+                    'static/experiments/oCanvas_example/materials/condition2/0000.png',
+                    'static/experiments/oCanvas_example/materials/condition2/0110.png',
+                    'static/experiments/oCanvas_example/materials/condition2/0111.png',
+                    'static/experiments/oCanvas_example/materials/condition2/1101.png',
+                    'static/experiments/oCanvas_example/materials/condition2/1110.png',
+                ],
+            }
+
+            labels = {
+                1: ['a','a','b','b','b'],
+                2: ['a','a','a','b','b'],
+            }
+
+            train_params = {
+                'objects': stim[subject['condition']],
+                'labels': labels[subject['condition']],
+                'categories': ['a'],
+                'btnLabels': {'a': 'Alpha'},
+                'n_blocks': 2,
+                'results': subject['results']['trainPhase'],
+                'feedback': true,
+            }
+
+            typicality_params = {
+                'objects': stim[subject['condition']],
+                'labels': labels[subject['condition']],
+                'n_blocks': 1,
+                'results': subject['results']['typicality'],
+                'sliderBins': 7,
+                'binLabels': ['0','1','2','3','4','5','6','7']
+            }
+
+
+            /** - - - Run Experiment via an Event Object - - - **/
+            eventGraph = {
+                instructions: function () {
+                    instructions.start(
+                        {text: 'Welcome to the experiment; glad you could join. These are the insructions rendered in <b>HTML</b> format; so, all the <i>HTML</i> tags youd normally use affect the text here. <br><br> click next to continue...'}, // params
+                        function () { setTimeout(function () { // what to do next
+                            eventGraph.ready()
+                        }, 100)}
+                    )
+                },
+
+                ready: function () {
+                    ready.start(
+                        {previous_event: eventGraph.instructions}, // params
+                        function () { setTimeout(function () { // what to do next
+                            eventGraph.training()
+                        }, 100)}
+                    )
+                },
+
+                training: function () {
+                    study.start(
+                        train_params, // params
+                        function () { setTimeout( function () { // what to do next
+                            eventGraph.end()
+                        },500)}
+                    )
+                },
+
+                typicality: function () {
+                    typicality.start(
+                        typicality_params, // params
+                        function () { setTimeout( function () { // what to do next
+                            eventGraph.sort()
+                        },500)}
+                    )
+                },
+
+                sort: function () {
+                    sort.start(
+                        {'objects': stim[subject['condition']], 'results': subject['results']['sort']}, // params
+                        function () { setTimeout( function () { // what to do next
+                            eventGraph.end()
+                        },500)}
+                    )
+                },
+
+                end: function () {
+                    instructions.start({text: 'All Finished!'}, function () {
+                        next('{{ current_user.id }}', '{{ current_user.condition }}', subject['results']) // <-- send data to server and start next experiment | this comes from the "utils.js" script
+                    })
+                },
+            }
+
+            // initialize first event
+            eventGraph.instructions()
+
+
+        </script>
+
+    </body>
+</html>

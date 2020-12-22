@@ -1,0 +1,42 @@
+<!-- init doc -->
+<!-- REMEMBER TO ADD SWARM -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Experiment</title>
+
+        <!-- You need this for passing data to the database -->
+        <!-- <script src="static/utils.js"></script> -->
+        <link rel="stylesheet" type="text/css" href="static/styles.css">
+
+    </head>
+
+
+    <body>
+        <p>Thanks, that's it for this section of the experiment. Click `next` to move on to the next stage.</p>
+
+        <button onclick='next_exp()' id='start_submit'>Next</button>
+        <br>
+        <br>
+        <button onclick='exit_early()' id='start_quit'>Quit Experiment<br>Early</button>
+
+        <script type="text/javascript">
+
+            next_exp = function () {
+                const queryString = window.location.search // <-- thanks to:  Yaphi Berhanu, James Hibbard @ https://www.sitepoint.com/get-url-parameters-with-javascript/
+                urlParams = new URLSearchParams(queryString)
+                window.location = urlParams.get('next_exp')
+            }
+
+            exit_early = function () {
+                console.log('quitting...')
+            }
+        </script> 
+
+
+    </body>
+
+
+</html>

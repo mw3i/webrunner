@@ -1,0 +1,67 @@
+<!-- init doc -->
+<!-- REMEMBER TO ADD SWARM -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Exit Page</title>
+
+        <!-- You need this for passing data to the database -->
+        <!-- <script src="static/utils.js"></script> -->
+        <link rel="stylesheet" type="text/css" href="static/styles.css">
+
+    </head>
+
+    <body>
+        
+        <!-- intro message -->
+        <div id='main' style="font-family: Arial">
+            <h1>That's all !!</h1>
+            <p>Thanks for your participation. Very much appreciated! Below is some information about the experiments you just participated in.</p>
+            
+            <button onclick='exitpage_exit_experiment()' id='start_quit'>Exit and Recieve Credit</button>
+
+            <hr>        
+            <!-- consent form -->
+            <div id='debrief_form'>
+                {% include "debriefform.html" %}
+            </div>
+            <hr>        
+
+            <div id = 'debrief_questionnaire'>
+                <form action="" method="post">
+                    {% if show_exit_survey == True %}
+                        <p>Wait! Before you go, we'd love to get your anonymous feedback on the experiments you participated in. This is completely optional; you'll still recieve full credit even if you don't respond :)</p>
+                        {{ form.hidden_tag() }}
+                        {% for field in form %}
+                            {% if field.type == "BooleanField" %}
+                                <p>{{ field() }} {{ field.label }}</p>
+                            
+                            {% elif field.type == "SubmitField" %}
+                                <br>
+                                <p>{{ field(id="start_submit") }}</p>
+                            
+                            {% elif field.type == "StringField" %}
+                                <p>{{ field.label }} {{ field() }}</p>
+                            
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                </form>
+            </div>
+
+        </div>
+        <script>
+            window.onbeforeunload = function() { return "Heads up: if you want to automatically recieve SONA credit, please click the `Recieve Credit` buttons on this page"; }
+            exitpage_exit_experiment = function () {
+                window.onbeforeunload = false
+                window.location = '_finalmessage_'
+            }
+        </script>
+
+
+    </body>
+
+
+</html>

@@ -1,0 +1,62 @@
+<!-- init doc -->
+<!-- REMEMBER TO ADD SWARM -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Experiment</title>
+
+        <!-- You need this for passing data to the database -->
+        <!-- <script src="static/utils.js"></script> -->
+        <link rel="stylesheet" type="text/css" href="static/styles.css">
+
+    </head>
+
+
+    <body>
+        
+        <!-- intro message -->
+        <div id='main' style="font-family: Arial">
+            <h1>Welcome!</h1>
+            <p>Thanks for signing up to participate. We really appreciate it :)</p>
+            <p>Please read the consent form, and then press "Start to begin.</p>
+
+            <hr>        
+
+            <!-- consent form -->
+            <div id='consent_form'>
+                {% include "consentform.html" %}
+            </div>
+
+            <hr>        
+
+            <div>
+                <form action="" method="post">
+                    {{ form.hidden_tag() }}
+                    <p> {{ form.name.label }} {{ form.name(size=32,class='uinput') }} </p>
+                    <p> {{ form.consent() }} {{ form.consent.label }} </p>
+                    <p> {{ form.submit(id="start_submit") }} </p> 
+                </form>
+                <p><b>Note:</b> Starting the experiment will initiate full screen mode on your computer (using full screen ensures all experiments load correctly). Please do not exit full screen at any point during the experiment.</p>
+                <button onclick='startpage_exit_experiment()' id='start_submit'>Quit Experiment<br>(I do not consent to participate)</button>
+            </div>
+
+        </div>
+
+        <script>
+            const queryString = window.location.search // <-- thanks to:  Yaphi Berhanu, James Hibbard @ https://www.sitepoint.com/get-url-parameters-with-javascript/
+            urlParams = new URLSearchParams(queryString)
+            creditid = urlParams.get('creditid')
+            localStorage.setItem('creditid', creditid)
+
+            startpage_exit_experiment = function () {
+                window.location = '_noconsent_exit_'
+            }
+        </script>
+
+
+    </body>
+
+
+</html>
