@@ -1,5 +1,7 @@
 # Webrunner
 
+**Check out the Demo:** https://webrunner-demo.herokuapp.com/
+
 **Built using:** python w/ flask | html/js/css | sql
 
 **Based on:** flask mega-tutorial from [miguel grinberg](https://blog.miguelgrinberg.com/index) | plus lots of inspiration from [psiturk](http://psiturk.org/)
@@ -59,8 +61,10 @@ Things it handles are:
 
 ## Roadmap
 
+- eventually: set up to be 'subject platform' independent (i.e., SONA, MTurk, Prolific, etc)
+  - prolific is just a parameterized completion url([instructions here](https://researcher-help.prolific.co/hc/en-gb/articles/360009220953))
+  - mturk will require dealing with their [api](https://docs.aws.amazon.com/AWSMechTurk/latest/AWSMturkAPI/Welcome.html)
 - keep anonymous as the _default_ option
-
 - more debugging / testing
   - this whole thing was put together kind of quickly and could definitely use more testing
 
