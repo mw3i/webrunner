@@ -24,7 +24,7 @@
 
     > i've found that sqlite has worked pretty much flawlessly to handle the amount of traffic we typically get using SONA; if you're running heavier traffic you'll want to switch to something like mySQL
 
-- it also helps to have a program that lets you run things in the background is also really useful (i suggest [screens](https://en.wikipedia.org/wiki/GNU_Screen)) 
+- it also helps to have a program that lets you run things in the background (i suggest [screens](https://en.wikipedia.org/wiki/GNU_Screen)) 
 
 > You'll also want to familiarize yourself with the unix terminal
 
